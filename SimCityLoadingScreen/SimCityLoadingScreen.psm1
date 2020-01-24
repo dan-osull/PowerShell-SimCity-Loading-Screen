@@ -2,8 +2,6 @@ Function Show-SimCityLoadingScreen {
     <#
     .SYNOPSIS
         Create a new PowerShell window that scrolls through classic Sim City loading messages
-    .DESCRIPTION
-        This function is a wrapper for loading_screen_script.ps1
     .EXAMPLE
         # Create loading screen
         $loadingScreen = Show-SimCityLoadingScreen
@@ -20,6 +18,8 @@ Function Show-SimCityLoadingScreen {
         System.Diagnostics.Process
     .LINK
         https://github.com/weebsnore/PowerShell-SimCity-Loading-Screen
+    .NOTES
+        This function is a wrapper for loading_screen_script.ps1
     #>
     param (
         [string]$WindowTitle,
@@ -29,7 +29,7 @@ Function Show-SimCityLoadingScreen {
     )
 
     # Decide whether to spawn pwsh or powershell
-    $powerShellPath = if ($PSVersionTable.PSEdition -eq 'Core') {'pwsh'} else {'powershell'}
+    $powerShellPath = if ($PSEdition -eq 'Core') {'pwsh'} else {'powershell'}
 
     # Construct PowerShell arguments
     $loadingScreenPath = Join-Path $PSScriptRoot 'loading_screen_script.ps1'

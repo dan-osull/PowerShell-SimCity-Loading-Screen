@@ -30,7 +30,7 @@ Author = "Dan O'Sullivan"
 # CompanyName = ''
 
 # Copyright statement for this module
-Copyright = "(c) Dan O'Sullivan. Released under the MIT License."
+Copyright = "Code released under the MIT License. loading_messages.txt is (c) Electronic Arts probably."
 
 # Description of the functionality provided by this module
 Description = 'Create a new PowerShell window that scrolls through classic Sim City loading messages'

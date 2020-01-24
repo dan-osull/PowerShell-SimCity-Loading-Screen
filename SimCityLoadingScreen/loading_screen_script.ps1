@@ -17,11 +17,12 @@ param (
 $WelcomeMessage
 ''
 
+$colours = [System.Enum]::GetValues('ConsoleColor')
+
 # Get messages and randomise
 $messages = Get-Content (Join-Path $PSScriptRoot 'loading_messages.txt') | Sort-Object {Get-Random}
 
 # Loop through messages
-$colours = [System.Enum]::GetValues('ConsoleColor')
 foreach ($message in $messages) {
     # Pad message to width of window
     $windowWidth = $host.UI.RawUI.WindowSize.Width

@@ -17,15 +17,17 @@ param (
 $WelcomeMessage
 ''
 
-$colours = [System.Enum]::GetValues('ConsoleColor')
+# Get messages and randomise
+$messages = Get-Content (Join-Path $PSScriptRoot 'loading_messages.txt') | Sort-Object {Get-Random}
 
-Get-Content (Join-Path $PSScriptRoot 'loading_messages.txt') | 
-    # Randomise order of messages
-    Sort-Object {Get-Random} | 
-    # Loop through messages
-    ForEach-Object {
-        # Display message with random foreground and background
-        Write-Host $_ -ForegroundColor ($colours | Get-Random) -BackgroundColor ($colours | Get-Random)
-        # Wait a random amount of time
-        Start-Sleep -Milliseconds (Get-Random -Minimum 0 -Maximum 1500)
-    }
+# Loop through messages
+$colours = [System.Enum]::GetValues('ConsoleColor')
+foreach ($message in $messages) {
+    # Pad message to width of window
+    $windowWidth = $host.UI.RawUI.WindowSize.Width
+    $message = $message.PadRight($windowWidth)
+    # Display message with random foreground and background
+    Write-Host $message -ForegroundColor ($colours | Get-Random) -BackgroundColor ($colours | Get-Random)
+    # Wait a random amount of time
+    Start-Sleep -Milliseconds (Get-Random -Minimum 0 -Maximum 1500)
+}
